@@ -1,8 +1,12 @@
 const express = require('express');
 const formidable = require('express-formidable');
+const mustacheExpress = require('mustache-express');
 const fs = require('fs');
 const app = express();
 
+app.engine('mustache', mustacheExpress());
+app.set('view engine', 'mustache');
+app.set('views', './views');
 
 app.use(express.static("public"));
 app.use(formidable());
@@ -17,18 +21,27 @@ app.get('/get-posts', (req, res) => {
    });
 });
 
+app.get('/posts/:postId', (req, res) => {
+  const postId = req.params.postId;
+  fs.readFile('./data/posts.json', (error, file) => {
+    parsedFile = JSON.parse(file);
+    postContent = parsedFile[postId];
+    res.send(postContent);
+    res.render('post', {post: postContent});
+  });
+});
+
 app.post('/create-post', (req,res) => {
   fs.readFile('./data/posts.json', (error, file) => {
     const parsedFile = JSON.parse(file);
-    const timestamp = Date.now().toString();
+    const timestamp = Date.now();
     parsedFile[timestamp] = req.fields.blogspot;
-    console.log(parsedFile);
-    fs.writeFile('./data/posts.json', JSON.stringify(parsedFile), (error) => {
+    const stringifiedFile = JSON.stringify(parsedFile);
+    fs.writeFile('./data/posts.json', stringifiedFile, (error) => {
       if (error) {
         res.send('there was an error, try again')
-      } else {
-        res.send('Success, your post has been saved')
       }
+      res.send(stringifiedFile)
     });
   });
 });

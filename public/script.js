@@ -27,29 +27,23 @@ function postBlogposts (url, data) {
         method: 'POST',
         body: data
     })
-    .then(function (res) {
-        res.json()
-            .then(function (json) {
-                console.log(json);
-                addBlogpostsToPage(json);
-                document.querySelector('form').reset();
-        })
-    })
-    .catch(function (err) {
-        console.error(err)
-    });
+      .then(res => res.json())
+      .then(json => {
+        addBlogpostsToPage(json);
+        document.querySelector('form').reset();
+      })
+      .catch(err => {
+          console.error(err)
+      });
 }
 
 function getBlogposts (url) {
     fetch(url, {
         method: 'GET'
     })
-    .then(function (res) {
-        res.json()
-        .then(function (json) {
-            console.log(json);
-            addBlogpostsToPage(json);
-        });
+    .then(res => res.json())
+    .then(json => {
+      addBlogpostsToPage(json);
     })
     .catch(function (err) {
         console.error(err)

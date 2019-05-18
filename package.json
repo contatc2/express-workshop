@@ -18,6 +18,7 @@
   "homepage": "https://github.com/contatc2/express-workshop#readme",
   "dependencies": {
     "express": "^4.17.0",
-    "express-formidable": "^1.2.0"
+    "express-formidable": "^1.2.0",
+    "mustache-express": "^1.2.8"
   }
 }
