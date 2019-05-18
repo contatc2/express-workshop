@@ -1,0 +1,23 @@
+{
+  "name": "express-workshop",
+  "version": "1.0.0",
+  "description": "express-workshop",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/contatc2/express-workshop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/contatc2/express-workshop/issues"
+  },
+  "homepage": "https://github.com/contatc2/express-workshop#readme",
+  "dependencies": {
+    "express": "^4.17.0",
+    "express-formidable": "^1.2.0"
+  }
+}
